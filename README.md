@@ -1,7 +1,13 @@
-# Awesome Project Build with TypeORM
+## Newspeed API
 
-Steps to run this project:
+> 학교 소식을 전달하고 받아보는 학교소식 뉴스피드 REST API
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+#### 사용
+
+* node.js
+* typescript
+* express
+* nodemon
+* mysql
+* typeORM
+* Swagger-UI
