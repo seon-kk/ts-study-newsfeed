@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Index } from "typeorm";
 import { Subs } from './subs';
 
 @Entity("student", { schema: "newspeed" })
@@ -6,9 +6,7 @@ export class Student {
     @PrimaryGeneratedColumn({ type: "int" })
     idx: number;
 
-    @Column({ type: "varchar", length: 256, unique: true })
-    user_id: string;
-
+    @Index()
     @Column({ type: "varchar", length: 256 })
     name: string;
 

@@ -1,7 +1,7 @@
 {
-   "name": "newspeed",
+   "name": "newsfeed",
    "version": "1.0.0",
-   "description": "newspeed api",
+   "description": "newsfeed api",
    "author": "Seonkyeong Ko",
    "license": "ISC",
    "dependencies": {

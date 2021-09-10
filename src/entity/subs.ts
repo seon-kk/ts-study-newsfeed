@@ -24,7 +24,7 @@ export class Subs {
     @Column({ type: "datetime" })
     startDate: Date;
 
-    @Column({ type: "datetime" })
+    @Column({ type: "datetime", nullable: true })
     endDate: Date;
 
     @CreateDateColumn()

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, Index } from "typeorm";
 import { School } from './school';
 import { Post } from './post';
 
@@ -7,17 +7,11 @@ export class Admin {
     @PrimaryGeneratedColumn({ type: "int" })
     idx: number;
 
-    @Column({ type: "varchar", length: 256, unique: true })
-    user_id: string;
-
+    @Index()
     @Column({ type: "varchar", length: 256 })
     name: string;
 
-    @ManyToOne(
-        () => School,
-        (school) => school.admins
-    )
-    @JoinColumn({ name: "schoolIdx" })
+    @OneToOne(() => School, (school) => school.adminIdx)
     schoolIdx: School;
 
     @CreateDateColumn()

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Index } from "typeorm";
 import { School } from './school';
 import { Admin } from './admin';
 
@@ -21,6 +21,7 @@ export class Post {
     @JoinColumn({ name: "adminIdx" })
     adminIdx: Admin;
 
+    @Index()
     @Column({ type: "varchar", length: 512})
     subject: string;
 

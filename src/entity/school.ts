@@ -1,28 +1,34 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, Index } from "typeorm";
 import { Admin } from './admin';
 import { Post } from './post';
 import { Subs } from './subs';
 
 @Entity("school", { schema: "newspeed" })
 export class School {
-  @PrimaryGeneratedColumn({ type: "int" })
-  idx: number;
+    @PrimaryGeneratedColumn({ type: "int" })
+    idx: number;
 
-  @Column({ type: "varchar", length: 256 })
-  name: string;
+    @Index()
+    @Column({ type: "varchar"})
+    name: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @Index()
+    @Column({ type: "varchar"})
+    region: string;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @OneToMany(() => Admin, admin => admin.schoolIdx)
-  admins: Admin[];
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-  @OneToMany(() => Post, post => post.schoolIdx)
-  posts: Post[];
+    @OneToOne(() => Admin, admin => admin.schoolIdx)
+    @JoinColumn({ name: "adminIdx" })
+    adminIdx: Admin;
 
-  @OneToMany(() => Subs, subs => subs.schoolIdx)
-  subs: Subs[];
+    @OneToMany(() => Post, post => post.schoolIdx)
+    posts: Post[];
+
+    @OneToMany(() => Subs, subs => subs.schoolIdx)
+    subs: Subs[];
 }
