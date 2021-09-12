@@ -35,25 +35,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-require("reflect-metadata");
-var typeorm_1 = require("typeorm");
-var router_1 = __importDefault(require("./router"));
-var app = (0, express_1.default)();
-app.get('/', function (request, response, next) {
-    response.send('hello');
-});
-app.listen(80, function () {
-    console.log('start');
-});
-app.use('/', router_1.default);
-(0, typeorm_1.createConnection)().then(function (connection) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        console.log('database connected');
-        return [2 /*return*/];
-    });
-}); }).catch(function (error) { return console.log(error); });
+var subsController = /** @class */ (function () {
+    function subsController() {
+    }
+    subsController.prototype.getSubs = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log('subsList');
+                return [2 /*return*/];
+            });
+        });
+    };
+    subsController.prototype.setNewSubs = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log('subsList');
+                return [2 /*return*/];
+            });
+        });
+    };
+    subsController.prototype.deleteSubs = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log('subsList');
+                return [2 /*return*/];
+            });
+        });
+    };
+    return subsController;
+}());
+exports.default = subsController;

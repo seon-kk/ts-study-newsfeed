@@ -35,25 +35,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-require("reflect-metadata");
 var typeorm_1 = require("typeorm");
-var router_1 = __importDefault(require("./router"));
-var app = (0, express_1.default)();
-app.get('/', function (request, response, next) {
-    response.send('hello');
-});
-app.listen(80, function () {
-    console.log('start');
-});
-app.use('/', router_1.default);
-(0, typeorm_1.createConnection)().then(function (connection) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        console.log('database connected');
-        return [2 /*return*/];
-    });
-}); }).catch(function (error) { return console.log(error); });
+var admin_1 = require("../entity/admin");
+var adminService = /** @class */ (function () {
+    function adminService() {
+        this.adminRepo = (0, typeorm_1.getRepository)(admin_1.Admin);
+    }
+    adminService.prototype.getAdminList = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var adminList;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.adminRepo.find()];
+                    case 1:
+                        adminList = _a.sent();
+                        console.log(adminList);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return adminService;
+}());
+exports.default = adminService;

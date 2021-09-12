@@ -38,22 +38,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-require("reflect-metadata");
-var typeorm_1 = require("typeorm");
-var router_1 = __importDefault(require("./router"));
-var app = (0, express_1.default)();
-app.get('/', function (request, response, next) {
-    response.send('hello');
-});
-app.listen(80, function () {
-    console.log('start');
-});
-app.use('/', router_1.default);
-(0, typeorm_1.createConnection)().then(function (connection) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        console.log('database connected');
-        return [2 /*return*/];
+var student_1 = __importDefault(require("../controller/student"));
+var router = express_1.default.Router();
+var controller = new student_1.default();
+router.get('/', function (req, res, next) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    _b = (_a = res).json;
+                    return [4 /*yield*/, controller.getStudentList()];
+                case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+            }
+        });
     });
-}); }).catch(function (error) { return console.log(error); });
+});
+module.exports = router;
