@@ -1,13 +1,11 @@
 import express from 'express';
-import studentController from '../controller/student';
+import StudentController from '../controller/student';
 const router = express.Router();
 
-const controller = new studentController();
+const controller = new StudentController();
 
 
-router.get('/', async function (req, res, next) {
-    return res.json(await controller.getStudentList());
-});
+router.get('/', controller.getStudentList);
 
 
 export = router;

@@ -1,8 +1,8 @@
 import express from 'express';
-import adminController from '../controller/admin';
+import AdminController from '../controller/admin';
 const router = express.Router();
 
-const controller = new adminController();
+const controller = new AdminController();
 
 
 router.get('/', controller.getAdminList);

@@ -23,7 +23,7 @@ export class School {
     updatedAt: Date;
 
     @OneToOne(() => Admin, admin => admin.schoolIdx)
-    @JoinColumn({ name: "adminIdx" })
+    @JoinColumn({ name: "adminIdx"})
     adminIdx: Admin;
 
     @OneToMany(() => Post, post => post.schoolIdx)
