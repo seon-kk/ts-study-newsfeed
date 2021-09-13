@@ -23,3 +23,5 @@ createConnection().then(async connection => {
     console.log('database connected');
 
 }).catch(error => console.log(error));
+
+export default app;

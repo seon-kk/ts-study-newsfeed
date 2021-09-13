@@ -9,7 +9,7 @@ export default class AdminController {
             const result = await admin.getAdminList();
             return res.status(200).json(result);
         } catch(error) {
-
+            console.log(error);
         }
     }
 
@@ -18,7 +18,16 @@ export default class AdminController {
             const result = await admin.getAdminByIdx(req.params.idx)
             return res.status(200).json(result);
         } catch(error) {
+            console.log(error);
+        }
+    }
 
+    async setNewAdmin(req: Request, res: Response, next: NextFunction) {
+        try {
+            const result = await admin.getAdminList();
+            return res.status(200).json(result);
+        } catch(error) {
+            console.log(error);
         }
     }
 }
