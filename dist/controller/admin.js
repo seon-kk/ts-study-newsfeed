@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,18 +34,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var adminController = /** @class */ (function () {
-    function adminController() {
+var admin_1 = __importDefault(require("../service/admin"));
+var admin = new admin_1.default();
+var AdminController = /** @class */ (function () {
+    function AdminController() {
     }
-    adminController.prototype.getAdminList = function () {
+    AdminController.prototype.getAdminList = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
+            var result, error_1;
             return __generator(this, function (_a) {
-                console.log('adminList');
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, admin.getAdminList()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, res.status(200).json()];
+                    case 2:
+                        error_1 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    return adminController;
+    return AdminController;
 }());
-exports.default = adminController;
+exports.default = AdminController;

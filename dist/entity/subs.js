@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Subs = void 0;
 var typeorm_1 = require("typeorm");
 var school_1 = require("./school");
 var student_1 = require("./student");
@@ -17,37 +16,37 @@ var Subs = /** @class */ (function () {
     function Subs() {
     }
     __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)({ type: "int" }),
+        typeorm_1.PrimaryGeneratedColumn({ type: "int" }),
         __metadata("design:type", Number)
     ], Subs.prototype, "idx", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return school_1.School; }, function (school) { return school.subs; }),
-        (0, typeorm_1.JoinColumn)({ name: "schoolIdx" }),
+        typeorm_1.ManyToOne(function () { return school_1.School; }, function (school) { return school.subs; }),
+        typeorm_1.JoinColumn({ name: "schoolIdx" }),
         __metadata("design:type", school_1.School)
     ], Subs.prototype, "schoolIdx", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return student_1.Student; }, function (student) { return student.subs; }),
-        (0, typeorm_1.JoinColumn)({ name: "studentIdx" }),
+        typeorm_1.ManyToOne(function () { return student_1.Student; }, function (student) { return student.subs; }),
+        typeorm_1.JoinColumn({ name: "studentIdx" }),
         __metadata("design:type", student_1.Student)
     ], Subs.prototype, "studentIdx", void 0);
     __decorate([
-        (0, typeorm_1.Column)({ type: "datetime" }),
+        typeorm_1.Column({ type: "datetime" }),
         __metadata("design:type", Date)
     ], Subs.prototype, "startDate", void 0);
     __decorate([
-        (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
+        typeorm_1.Column({ type: "datetime", nullable: true }),
         __metadata("design:type", Date)
     ], Subs.prototype, "endDate", void 0);
     __decorate([
-        (0, typeorm_1.CreateDateColumn)(),
+        typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], Subs.prototype, "createdAt", void 0);
     __decorate([
-        (0, typeorm_1.UpdateDateColumn)(),
+        typeorm_1.UpdateDateColumn(),
         __metadata("design:type", Date)
     ], Subs.prototype, "updatedAt", void 0);
     Subs = __decorate([
-        (0, typeorm_1.Entity)("subs", { schema: "newspeed" })
+        typeorm_1.Entity("subs", { schema: "newspeed" })
     ], Subs);
     return Subs;
 }());

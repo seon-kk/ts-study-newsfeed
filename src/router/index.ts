@@ -11,6 +11,7 @@ import newsfeedRouter from './newsfeed';
 
 const router = express.Router();
 
+
 router.use('/admin', adminRouter);
 router.use('/student', studentRouter);
 router.use('/school', schoolRouter);

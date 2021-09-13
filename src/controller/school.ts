@@ -18,13 +18,12 @@ export default class SchoolController {
 
             return res.status(200).json(result);
         } catch (error) {
-
+            console.log(error);
         }
     }
 
     async setNewSchool(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log(req.body);
             const iSchool: ISchool = {
                 name: req.body.name,
                 region: req.body.region,
@@ -32,11 +31,11 @@ export default class SchoolController {
             };
 
             if(await admin.getAdminByIdx(iSchool.adminIdx)) {
-                await school.setNewSchool(iSchool);
+                return res.json(await school.setNewSchool(iSchool));
             }
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 

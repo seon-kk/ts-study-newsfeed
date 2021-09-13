@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Post = void 0;
 var typeorm_1 = require("typeorm");
 var school_1 = require("./school");
 var admin_1 = require("./admin");
@@ -17,38 +16,38 @@ var Post = /** @class */ (function () {
     function Post() {
     }
     __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)({ type: "int" }),
+        typeorm_1.PrimaryGeneratedColumn({ type: "int" }),
         __metadata("design:type", Number)
     ], Post.prototype, "idx", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return school_1.School; }, function (school) { return school.posts; }),
-        (0, typeorm_1.JoinColumn)({ name: "schoolIdx" }),
+        typeorm_1.ManyToOne(function () { return school_1.School; }, function (school) { return school.posts; }),
+        typeorm_1.JoinColumn({ name: "schoolIdx" }),
         __metadata("design:type", school_1.School)
     ], Post.prototype, "schoolIdx", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return admin_1.Admin; }, function (admin) { return admin.posts; }),
-        (0, typeorm_1.JoinColumn)({ name: "adminIdx" }),
+        typeorm_1.ManyToOne(function () { return admin_1.Admin; }, function (admin) { return admin.posts; }),
+        typeorm_1.JoinColumn({ name: "adminIdx" }),
         __metadata("design:type", admin_1.Admin)
     ], Post.prototype, "adminIdx", void 0);
     __decorate([
-        (0, typeorm_1.Index)(),
-        (0, typeorm_1.Column)({ type: "varchar", length: 512 }),
+        typeorm_1.Index(),
+        typeorm_1.Column({ type: "varchar", length: 512 }),
         __metadata("design:type", String)
     ], Post.prototype, "subject", void 0);
     __decorate([
-        (0, typeorm_1.Column)({ type: "text" }),
+        typeorm_1.Column({ type: "text" }),
         __metadata("design:type", String)
     ], Post.prototype, "content", void 0);
     __decorate([
-        (0, typeorm_1.CreateDateColumn)(),
+        typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], Post.prototype, "createdAt", void 0);
     __decorate([
-        (0, typeorm_1.UpdateDateColumn)(),
+        typeorm_1.UpdateDateColumn(),
         __metadata("design:type", Date)
     ], Post.prototype, "updatedAt", void 0);
     Post = __decorate([
-        (0, typeorm_1.Entity)("post", { schema: "newspeed" })
+        typeorm_1.Entity("post", { schema: "newspeed" })
     ], Post);
     return Post;
 }());

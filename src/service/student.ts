@@ -7,5 +7,10 @@ export default class StudentService extends ormService {
         return await repo.createQueryBuilder("student").getMany();
     }
 
+    async getStudentByIdx(idx: number) {
+        const repo = await this.getRepository('Student');
+        return await repo.find({idx: idx});
+    }
+
 }
 

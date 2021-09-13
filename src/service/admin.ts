@@ -7,12 +7,11 @@ export default class AdminService extends ormService {
         return await repo.createQueryBuilder("admin").getMany();
     }
 
-    async getAdminByIdx(idx: number) {
+    async getAdminByIdx(idx: number|string) {
         const repo = await this.getRepository('Admin');
 
         const result = await repo.createQueryBuilder("admin")
             .where("admin.idx = :idx", { idx: idx} ).getOneOrFail();
-        console.log(result);
             return result;
     }
 }

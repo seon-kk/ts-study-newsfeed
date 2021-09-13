@@ -14,6 +14,8 @@ app.listen(80,()=>{
     console.log('start')
 })
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/', router);
 
 

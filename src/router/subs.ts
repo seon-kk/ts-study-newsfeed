@@ -1,10 +1,10 @@
 import express from 'express';
-import subsController from '../controller/subs';
+import SubsController from '../controller/subs';
 
 const router = express.Router();
-const controller = new subsController();
+const controller = new SubsController();
 
-router.get('/:studentIdx', controller.getSubs);
+router.get('/student/:idx', controller.getSubsByStudent);
 router.post('/', controller.setNewSubs);
 router.delete('/', controller.deleteSubs);
 

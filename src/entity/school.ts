@@ -26,9 +26,6 @@ export class School {
     @JoinColumn({ name: "adminIdx"})
     adminIdx: Admin;
 
-    @OneToMany(() => Post, post => post.schoolIdx)
-    posts: Post[];
-
     @OneToMany(() => Subs, subs => subs.schoolIdx)
     subs: Subs[];
 }

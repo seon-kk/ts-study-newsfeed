@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -47,48 +34,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var ormService_1 = __importDefault(require("./ormService"));
-var AdminService = /** @class */ (function (_super) {
-    __extends(AdminService, _super);
-    function AdminService() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var typeorm_1 = require("typeorm");
+var ormService = /** @class */ (function () {
+    function ormService() {
     }
-    AdminService.prototype.getAdminList = function () {
+    ormService.prototype.getRepository = function (repository) {
         return __awaiter(this, void 0, void 0, function () {
-            var repo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getRepository('Admin')];
-                    case 1:
-                        repo = _a.sent();
-                        return [4 /*yield*/, repo.createQueryBuilder("admin").getMany()];
-                    case 2: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, typeorm_1.getConnection().getRepository(repository)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    AdminService.prototype.getAdminByIdx = function (idx) {
+    ormService.prototype.getConnection = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var repo, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getRepository('Admin')];
-                    case 1:
-                        repo = _a.sent();
-                        return [4 /*yield*/, repo.createQueryBuilder("admin")
-                                .where("admin.idx = :idx", { idx: idx }).getOneOrFail()];
-                    case 2:
-                        result = _a.sent();
-                        console.log(result);
-                        return [2 /*return*/, result];
+                    case 0: return [4 /*yield*/, typeorm_1.getConnection()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    return AdminService;
-}(ormService_1.default));
-exports.default = AdminService;
+    return ormService;
+}());
+exports.default = ormService;

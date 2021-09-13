@@ -8,13 +8,6 @@ export class Post {
     idx: number;
 
     @ManyToOne(
-        () => School,
-        (school) => school.posts
-    )
-    @JoinColumn({ name: "schoolIdx" })
-    schoolIdx: School;
-
-    @ManyToOne(
         () => Admin,
         (admin) => admin.posts
     )

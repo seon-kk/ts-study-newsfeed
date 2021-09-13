@@ -1,5 +1,3 @@
-import { Request } from 'express';
-import { School } from '../entity/school';
 import { ISchool } from '../interface/school';
 import ormService from "./ormService";
 
@@ -11,16 +9,21 @@ export default class SchoolService extends ormService {
         return await repo.createQueryBuilder("school").getMany();
     }
 
-    async setNewSchool(iSchool: ISchool) {
-        const schoolRepo = await this.getConnection();
+    async getSchoolByIdx(idx: number) {
+        const repo = await this.getRepository('School');
+        return await repo.find({idx: idx});
+    }
 
-        await schoolRepo.createQueryBuilder().insert().into(School)
-            .values({
+    async setNewSchool(iSchool: ISchool) {
+        const schoolRepo = await this.getRepository('School');
+
+        const insert = await schoolRepo.save({
                 adminIdx: {idx: iSchool.adminIdx},
                 name: iSchool.name,
                 region: iSchool.region
-            }).execute();
+            });
 
+        return insert;
     }
 
 }
