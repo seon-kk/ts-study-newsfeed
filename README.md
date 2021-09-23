@@ -1,13 +1,20 @@
-## Newsfeed API
+### Typescript, TypeORM 스터디를 위한 뉴스피드 API 만들기
 
-> 학교 소식을 전달하고 받아보는 학교소식 뉴스피드 REST API
-
-#### 사용
-
+#### 스택
 * node.js
 * typescript
 * express
 * nodemon
-* mysql
-* typeORM
+* mysql / typeORM
+* mocha / chai / supertest
 * Swagger-UI
+
+
+#### 기능
+
+* 학교 등록
+* 학교 소식 작성/수정/삭제
+* 학교 구독
+* 구독 목록 확인/취소
+* 구독한 학교 소식 보기
+

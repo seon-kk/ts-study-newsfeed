@@ -12,9 +12,9 @@ const nowTime = new NowTime();
 
 export default class SubsController {
 
-    async getSubsByStudent(req: Request, res: Response, next: NextFunction) {
+    async getNowSubsByStudent(req: Request, res: Response, next: NextFunction) {
         try {
-            res.json(await subs.getSubsByStudent(req.params.idx));
+            res.json(await subs.getNowSubsByStudent(req.params.idx));
         } catch (error) {
             console.log(error);
         }

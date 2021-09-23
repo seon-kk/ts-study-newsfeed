@@ -11,8 +11,9 @@ export default class AdminService extends ormService {
         const repo = await this.getRepository('Admin');
 
         const result = await repo.createQueryBuilder("admin")
-            .where("admin.idx = :idx", { idx: idx} ).getOneOrFail();
-            return result;
+            .where("admin.idx = :idx", { idx: idx} ).getMany();
+        
+        return result;
     }
 }
 

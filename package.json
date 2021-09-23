@@ -33,7 +33,7 @@
     "typescript": "3.3.3333"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register src/test/*.ts",
+    "test": "mocha -r ts-node/register --timeout 10000 src/test/*.ts",
     "start": "ts-node src/app.ts",
     "dev": "nodemon --exec ts-node src/app.ts",
     "build": "tsc -p ."

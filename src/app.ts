@@ -6,6 +6,7 @@ import router from "./router";
 
 const app = express();
 
+
 app.get('/', (request:Request, response:Response, next: NextFunction) => {
     response.send('hello');
 });
@@ -18,10 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/', router);
 
-
 createConnection().then(async connection => {
     console.log('database connected');
-
 }).catch(error => console.log(error));
 
 export default app;

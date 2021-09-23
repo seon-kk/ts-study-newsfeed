@@ -14,6 +14,13 @@ export default class SchoolService extends ormService {
         return await repo.find({idx: idx});
     }
 
+    async getSchoolByAdminIdx(idx: number) {
+        const repo = await this.getRepository('School');
+        const result = await repo.createQueryBuilder('school')
+            .where("school.adminIdx = :idx", {idx:idx}).getRawOne();
+        return result;
+    }
+
     async setNewSchool(iSchool: ISchool) {
         const schoolRepo = await this.getRepository('School');
 

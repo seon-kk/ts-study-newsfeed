@@ -1,11 +1,22 @@
 import ormService from "./ormService";
 import { ISubs } from '../interface/subs';
 import { IsNull } from "typeorm";
-import { isNull } from "util";
 
 export default class SubsService extends ormService {
 
-    async getSubsByStudent(studentIdx: number | string) {
+    async getTotalSubsByStudent(studentIdx: number) {
+        const repo = await this.getRepository('Subs');
+        const result = await repo.find({
+            where: {
+                studentIdx: studentIdx
+            }
+        });
+        console.log(result);
+        return result;
+    }
+
+
+    async getNowSubsByStudent(studentIdx: number | string) {
         const repo = await this.getRepository('Subs');
         const result = await repo.find({
             where: {

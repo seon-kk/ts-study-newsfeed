@@ -13,7 +13,8 @@ export default class PostService extends ormService {
         const insert = await postRepo.save({
                 subject: iPost.subject,
                 content: iPost.content,
-                adminIdx: {idx: iPost.adminIdx}
+                adminIdx: {idx: iPost.adminIdx},
+                schoolIdx: {idx: iPost.schoolIdx}
             });
 
         console.log(insert);
@@ -27,7 +28,8 @@ export default class PostService extends ormService {
                 idx: iPost.idx,
                 subject: iPost.subject,
                 content: iPost.content,
-                adminIdx: {idx: iPost.adminIdx}
+                adminIdx: {idx: iPost.adminIdx},
+                schoolIdx: {idx: iPost.schoolIdx}
             });
 
         console.log(insert);
