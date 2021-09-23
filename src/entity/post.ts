@@ -13,6 +13,14 @@ export class Post {
     )
     @JoinColumn({ name: "adminIdx" })
     adminIdx: Admin;
+    
+    @ManyToOne(
+        () => School,
+        (school) => school.posts
+    )
+    @JoinColumn({ name: "schoolIdx" })
+    schoolIdx: School;
+
 
     @Index()
     @Column({ type: "varchar", length: 512})
