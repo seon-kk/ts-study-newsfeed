@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -34,34 +35,130 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var postController = /** @class */ (function () {
-    function postController() {
+var post_1 = __importDefault(require("../service/post"));
+var admin_1 = __importDefault(require("../service/admin"));
+var school_1 = __importDefault(require("../service/school"));
+var admin = new admin_1.default();
+var post = new post_1.default();
+var school = new school_1.default();
+var PostController = /** @class */ (function () {
+    function PostController() {
     }
-    postController.prototype.getPost = function (req, res, next) {
+    PostController.prototype.getPost = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('postList');
-                return [2 /*return*/];
+            var _a, _b, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, post.getPost()];
+                    case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    case 2:
+                        error_1 = _c.sent();
+                        console.log(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    postController.prototype.setNewPost = function (req, res, next) {
+    PostController.prototype.setNewPost = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('postList');
-                return [2 /*return*/];
+            var iPost, adms, sch, _a, _b, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 4, , 5]);
+                        iPost = {
+                            subject: req.body.subject,
+                            content: req.body.content,
+                            adminIdx: req.body.adminIdx
+                        };
+                        return [4 /*yield*/, admin.getAdminByIdx(iPost.adminIdx)];
+                    case 1:
+                        adms = _c.sent();
+                        if (adms.length < 1) {
+                            return [2 /*return*/, res.status(400).send({
+                                    adminIdx: iPost.adminIdx,
+                                    msg: '해당하는 관리자가 없습니다.'
+                                })];
+                        }
+                        return [4 /*yield*/, school.getSchoolByAdminIdx(iPost.adminIdx)];
+                    case 2:
+                        sch = _c.sent();
+                        if (sch.length < 1) {
+                            return [2 /*return*/, res.status(400).send({
+                                    adminIdx: iPost.adminIdx,
+                                    msg: '개설된 학교가 없습니다.'
+                                })];
+                        }
+                        console.log(sch.school_idx);
+                        iPost.schoolIdx = Number(sch.school_idx);
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, post.setNewPost(iPost)];
+                    case 3: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    case 4:
+                        error_2 = _c.sent();
+                        console.log(error_2);
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
             });
         });
     };
-    postController.prototype.modifyPost = function (req, res, next) {
+    PostController.prototype.modifyPost = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('postList');
-                return [2 /*return*/];
+            var iPost, _a, _b, error_3;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 4, , 5]);
+                        iPost = {
+                            idx: req.body.idx,
+                            subject: req.body.subject,
+                            content: req.body.content,
+                            adminIdx: req.body.adminIdx
+                        };
+                        return [4 /*yield*/, admin.getAdminByIdx(iPost.adminIdx)];
+                    case 1:
+                        if (!_c.sent()) return [3 /*break*/, 3];
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, post.modifyPost(iPost)];
+                    case 2: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    case 3: return [3 /*break*/, 5];
+                    case 4:
+                        error_3 = _c.sent();
+                        console.log(error_3);
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
             });
         });
     };
-    return postController;
+    PostController.prototype.deletePost = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, error_4;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, post.deletePost(req.params.idx)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    case 2:
+                        error_4 = _c.sent();
+                        console.log(error_4);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return PostController;
 }());
-exports.default = postController;
+exports.default = PostController;

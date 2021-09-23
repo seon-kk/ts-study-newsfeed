@@ -7,4 +7,5 @@ var admin_1 = __importDefault(require("../controller/admin"));
 var router = express_1.default.Router();
 var controller = new admin_1.default();
 router.get('/', controller.getAdminList);
+router.get('/:idx', controller.getAdminByIdx);
 module.exports = router;

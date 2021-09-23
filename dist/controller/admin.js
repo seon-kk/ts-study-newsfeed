@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -53,9 +54,50 @@ var AdminController = /** @class */ (function () {
                         return [4 /*yield*/, admin.getAdminList()];
                     case 1:
                         result = _a.sent();
-                        return [2 /*return*/, res.status(200).json()];
+                        return [2 /*return*/, res.status(200).json(result)];
                     case 2:
                         error_1 = _a.sent();
+                        console.log(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AdminController.prototype.getAdminByIdx = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, admin.getAdminByIdx(req.params.idx)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, res.status(200).json(result)];
+                    case 2:
+                        error_2 = _a.sent();
+                        console.log(error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AdminController.prototype.setNewAdmin = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, admin.getAdminList()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, res.status(200).json(result)];
+                    case 2:
+                        error_3 = _a.sent();
+                        console.log(error_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }

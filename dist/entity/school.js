@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.School = void 0;
 var typeorm_1 = require("typeorm");
 var admin_1 = require("./admin");
 var post_1 = require("./post");
@@ -17,42 +18,42 @@ var School = /** @class */ (function () {
     function School() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn({ type: "int" }),
+        (0, typeorm_1.PrimaryGeneratedColumn)({ type: "int" }),
         __metadata("design:type", Number)
     ], School.prototype, "idx", void 0);
     __decorate([
-        typeorm_1.Index(),
-        typeorm_1.Column({ type: "varchar" }),
+        (0, typeorm_1.Index)(),
+        (0, typeorm_1.Column)({ type: "varchar" }),
         __metadata("design:type", String)
     ], School.prototype, "name", void 0);
     __decorate([
-        typeorm_1.Index(),
-        typeorm_1.Column({ type: "varchar" }),
+        (0, typeorm_1.Index)(),
+        (0, typeorm_1.Column)({ type: "varchar" }),
         __metadata("design:type", String)
     ], School.prototype, "region", void 0);
     __decorate([
-        typeorm_1.CreateDateColumn(),
+        (0, typeorm_1.CreateDateColumn)(),
         __metadata("design:type", Date)
     ], School.prototype, "createdAt", void 0);
     __decorate([
-        typeorm_1.UpdateDateColumn(),
+        (0, typeorm_1.UpdateDateColumn)(),
         __metadata("design:type", Date)
     ], School.prototype, "updatedAt", void 0);
     __decorate([
-        typeorm_1.OneToOne(function () { return admin_1.Admin; }, function (admin) { return admin.schoolIdx; }),
-        typeorm_1.JoinColumn({ name: "adminIdx" }),
+        (0, typeorm_1.OneToOne)(function () { return admin_1.Admin; }, function (admin) { return admin.schoolIdx; }),
+        (0, typeorm_1.JoinColumn)({ name: "adminIdx" }),
         __metadata("design:type", admin_1.Admin)
     ], School.prototype, "adminIdx", void 0);
     __decorate([
-        typeorm_1.OneToMany(function () { return post_1.Post; }, function (post) { return post.schoolIdx; }),
+        (0, typeorm_1.OneToMany)(function () { return post_1.Post; }, function (posts) { return posts.schoolIdx; }),
         __metadata("design:type", Array)
     ], School.prototype, "posts", void 0);
     __decorate([
-        typeorm_1.OneToMany(function () { return subs_1.Subs; }, function (subs) { return subs.schoolIdx; }),
+        (0, typeorm_1.OneToMany)(function () { return subs_1.Subs; }, function (subs) { return subs.schoolIdx; }),
         __metadata("design:type", Array)
     ], School.prototype, "subs", void 0);
     School = __decorate([
-        typeorm_1.Entity("school", { schema: "newspeed" })
+        (0, typeorm_1.Entity)("school", { schema: "newspeed" })
     ], School);
     return School;
 }());

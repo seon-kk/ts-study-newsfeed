@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -34,34 +35,115 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var subsController = /** @class */ (function () {
-    function subsController() {
+var subs_1 = __importDefault(require("../service/subs"));
+var student_1 = __importDefault(require("../service/student"));
+var school_1 = __importDefault(require("../service/school"));
+var dateTime_1 = require("../utils/dateTime");
+var subs = new subs_1.default();
+var student = new student_1.default();
+var school = new school_1.default();
+var nowTime = new dateTime_1.NowTime();
+var SubsController = /** @class */ (function () {
+    function SubsController() {
     }
-    subsController.prototype.getSubs = function (req, res, next) {
+    SubsController.prototype.getNowSubsByStudent = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('subsList');
-                return [2 /*return*/];
+            var _a, _b, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, subs.getNowSubsByStudent(req.params.idx)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _c.sent();
+                        console.log(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    subsController.prototype.setNewSubs = function (req, res, next) {
+    SubsController.prototype.setNewSubs = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('subsList');
-                return [2 /*return*/];
+            var now, iSubs, std, sch, rsub, _a, _b, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 5, , 6]);
+                        now = nowTime.nowTimeStr();
+                        iSubs = {
+                            studentIdx: req.body.studentIdx,
+                            schoolIdx: req.body.schoolIdx,
+                            startDate: now
+                        };
+                        return [4 /*yield*/, student.getStudentByIdx(iSubs.studentIdx)];
+                    case 1:
+                        std = _c.sent();
+                        if (std.length < 1) {
+                            return [2 /*return*/, res.status(400).send({
+                                    studentIdx: iSubs.studentIdx,
+                                    msg: '해당하는 학생이 없습니다.'
+                                })];
+                        }
+                        return [4 /*yield*/, school.getSchoolByIdx(iSubs.schoolIdx)];
+                    case 2:
+                        sch = _c.sent();
+                        if (sch.length < 1) {
+                            return [2 /*return*/, res.status(400).send({
+                                    schoolIdx: iSubs.schoolIdx,
+                                    msg: '해당하는 학생이 없습니다.'
+                                })];
+                        }
+                        return [4 /*yield*/, subs.getNowSubs(iSubs)];
+                    case 3:
+                        rsub = _c.sent();
+                        if (rsub.length > 0) {
+                            return [2 /*return*/, res.status(400).send({
+                                    schoolIdx: iSubs.schoolIdx,
+                                    msg: '이미 해당 학교를 구독중입니다.'
+                                })];
+                        }
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, subs.setNewSubs(iSubs)];
+                    case 4:
+                        _b.apply(_a, [_c.sent()]);
+                        return [3 /*break*/, 6];
+                    case 5:
+                        error_2 = _c.sent();
+                        console.log(error_2);
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
+                }
             });
         });
     };
-    subsController.prototype.deleteSubs = function (req, res, next) {
+    SubsController.prototype.deleteSubs = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('subsList');
-                return [2 /*return*/];
+            var _a, _b, error_3;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, subs.deleteSubs(req.params.idx)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    case 2:
+                        error_3 = _c.sent();
+                        console.error(error_3);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    return subsController;
+    return SubsController;
 }());
-exports.default = subsController;
+exports.default = SubsController;

@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -34,18 +35,59 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var newsfeedController = /** @class */ (function () {
-    function newsfeedController() {
+var newsfeed_1 = __importDefault(require("../service/newsfeed"));
+var subs_1 = __importDefault(require("../service/subs"));
+var student_1 = __importDefault(require("../service/student"));
+var student = new student_1.default();
+var subs = new subs_1.default();
+var feeds = new newsfeed_1.default();
+var NewsfeedController = /** @class */ (function () {
+    function NewsfeedController() {
     }
-    newsfeedController.prototype.getNewsfeedList = function (req, res, next) {
+    NewsfeedController.prototype.getNewsfeedList = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('newsfeedList');
-                return [2 /*return*/];
+            var studentIdx, std, rsub, _a, _b, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 4, , 5]);
+                        studentIdx = Number(req.params.studentIdx);
+                        return [4 /*yield*/, student.getStudentByIdx(studentIdx)];
+                    case 1:
+                        std = _c.sent();
+                        if (std.length < 1) {
+                            return [2 /*return*/, res.status(400).send({
+                                    studentIdx: studentIdx,
+                                    msg: '해당하는 학생이 없습니다.'
+                                })];
+                        }
+                        return [4 /*yield*/, subs.getTotalSubsByStudent(studentIdx)];
+                    case 2:
+                        rsub = _c.sent();
+                        if (rsub.length < 1) {
+                            return [2 /*return*/, res.status(400).send({
+                                    studentIdx: studentIdx,
+                                    msg: '구독한 학교가 없습니다.'
+                                })];
+                        }
+                        _b = (_a = res).json;
+                        return [4 /*yield*/, feeds.getNewsFeedList(studentIdx)];
+                    case 3: 
+                    //피드
+                    return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    case 4:
+                        error_1 = _c.sent();
+                        console.log(error_1);
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
             });
         });
     };
-    return newsfeedController;
+    return NewsfeedController;
 }());
-exports.default = newsfeedController;
+exports.default = NewsfeedController;

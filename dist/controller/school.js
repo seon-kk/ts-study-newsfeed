@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -61,6 +62,7 @@ var SchoolController = /** @class */ (function () {
                         return [2 /*return*/, res.status(200).json(result)];
                     case 2:
                         error_1 = _a.sent();
+                        console.log(error_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -69,12 +71,11 @@ var SchoolController = /** @class */ (function () {
     };
     SchoolController.prototype.setNewSchool = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var iSchool, error_2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var iSchool, _a, _b, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 4, , 5]);
-                        console.log(req.body);
+                        _c.trys.push([0, 4, , 5]);
                         iSchool = {
                             name: req.body.name,
                             region: req.body.region,
@@ -82,14 +83,13 @@ var SchoolController = /** @class */ (function () {
                         };
                         return [4 /*yield*/, admin.getAdminByIdx(iSchool.adminIdx)];
                     case 1:
-                        if (!_a.sent()) return [3 /*break*/, 3];
+                        if (!_c.sent()) return [3 /*break*/, 3];
+                        _b = (_a = res).json;
                         return [4 /*yield*/, school.setNewSchool(iSchool)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
+                    case 2: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
                     case 3: return [3 /*break*/, 5];
                     case 4:
-                        error_2 = _a.sent();
+                        error_2 = _c.sent();
                         console.log(error_2);
                         return [3 /*break*/, 5];
                     case 5: return [2 /*return*/];
