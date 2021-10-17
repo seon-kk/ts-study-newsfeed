@@ -1,4 +1,4 @@
-### Typescript, TypeORM 스터디를 위한 뉴스피드 API 만들기
+## Typescript, TypeORM 스터디를 위한 뉴스피드 API 만들기
 - - -
 
 ##### 내용
@@ -13,8 +13,7 @@
 * __테스트__
     * mocha, chai, supertest 세팅 (완료)
     * 샘플 테스트 작성 (완료)
-    * 유닛 테스트 작성
-    * API 테스트 작성
+    * 테스트 작성
 
 - - -
 
@@ -36,6 +35,14 @@
 * 학교 소식 작성/수정/삭제
 * 학교 구독
 * 구독 목록 확인/취소
-* 구독한 학교 소식 보기 (작업중)
 
+- - -
 
+#### ERD
+![erd.png](./image/erd.png)
+
+- - -
+
+#### API 문서
+
+* /api-docs 에서 swaggerUI로 확인
