@@ -2,16 +2,16 @@
 
 ##### 내용
 * __구성__
-    * Typescript, Node.js, MySQL, TypeORM 세팅 (완료)
-    * TypeORM Entity 구성 (완료)
+    * Typescript, Node.js, MySQL, TypeORM 세팅
+    * TypeORM Entity 구성
 * __API__
     * router 
     * controller / service
 * __문서화__
     * swagger API 작성
 * __테스트__
-    * mocha, chai, supertest 세팅 (완료)
-    * 샘플 테스트 작성 (완료)
+    * mocha, chai, supertest 세팅
+    * 샘플 테스트 작성
     * 테스트 작성
 
 - - -
