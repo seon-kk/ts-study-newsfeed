@@ -20,8 +20,7 @@
 * Node.js
 * Typescript
 * express.js
-* nodemon
-* ts-node
+* nodemon / ts-node
 * MySQL / TypeORM
 * mocha / chai / supertest
 * Swagger-UI
